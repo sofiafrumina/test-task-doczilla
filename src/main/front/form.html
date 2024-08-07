@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление Студентами</title>
+</head>
+<body>
+<h1>Управление Студентами</h1>
+
+<!-- Форма добавления студента -->
+<form id="addStudentForm">
+    <label for="name">Имя:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="surname">Фамилия:</label><br>
+    <input type="text" id="surname" name="surname"><br>
+    <label for="patronymic">Отчество:</label><br>
+    <input type="text" id="patronymic" name="patronymic"><br>
+    <label for="birthdate">Дата рождения:</label><br>
+    <input type="date" id="birthdate" name="birthdate"><br>
+    <label for="groupName">Группа:</label><br>
+    <input type="text" id="groupName" name="groupName"><br>
+    <label for="uniqueNumber">Уникальный номер:</label><br>
+    <input type="number" id="uniqueNumber" name="uniqueNumber"><br>
+    <button type="submit">Добавить студента</button>
+</form>
+
+<form id="deleteStudentForm">
+    <input type="number" id="uniqueNumberInput" placeholder="Введите уникальный номер"><br>
+    <button id="deleteButton">Удалить</button><br>
+</form>
+<!-- Таблица студентов -->
+<table id="studentsTable">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Дата Рождения</th>
+        <th>Группа</th>
+        <th>Уникальный номер</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="app.js"></script>
+</body>
+</html>
