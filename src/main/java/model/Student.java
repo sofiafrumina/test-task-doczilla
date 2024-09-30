@@ -1,93 +1,72 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
-
-import java.time.LocalDate;
-
-@Entity
-@Table(name = "students")
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String surname;
-    private String patronymic;
-    private LocalDate birthdate;
-    private String groupName;
-    private Integer uniqueNumber;
+    private int id;               // Уникальный номер студента
+    private String firstName;      // Имя
+    private String lastName;       // Фамилия
+    private String patronymic;     // Отчество
+    private String group;          // Группа
+    private String birthDate;      // Дата рождения
 
-    // Getter для id
-    public Long getId() {
+    // Конструктор без параметров (для создания пустых объектов)
+    public Student() {}
+
+    // Конструктор с параметрами (для создания объекта студента)
+    public Student(int id, String firstName, String lastName, String patronymic, String group, String birthDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.group = group;
+        this.birthDate = birthDate;
+    }
+
+    // Геттеры и сеттеры для каждого поля
+    public int getId() {
         return id;
     }
 
-    // Setter для id
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    // Getter для name
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    // Setter для name
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    // Getter для surname
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    // Setter для surname
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    // Getter для patronymic
     public String getPatronymic() {
         return patronymic;
     }
 
-    // Setter для patronymic
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
 
-    // Getter для birthdate
-    public LocalDate getBirthdate() {
-        return birthdate;
+    public String getGroup() {
+        return group;
     }
 
-    // Setter для birthdate
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
-    // Getter для groupName
-    public String getGroupName() {
-        return groupName;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    // Setter для groupName
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    // Getter для uniqueNumber
-    public Integer getUniqueNumber() {
-        return uniqueNumber;
-    }
-
-    // Setter для uniqueNumber
-    public void setUniqueNumber(Integer uniqueNumber) {
-        this.uniqueNumber = uniqueNumber;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }
