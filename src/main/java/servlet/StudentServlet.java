@@ -1,5 +1,4 @@
 package servlet;
-
 import db.Database;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +30,7 @@ public class StudentServlet extends HttpServlet {
             statement.setString(5, studentGroup);
             statement.executeUpdate();
         } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding student: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -58,6 +58,7 @@ public class StudentServlet extends HttpServlet {
 
             out.println("]");
         } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching students: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -70,8 +71,10 @@ public class StudentServlet extends HttpServlet {
             statement.setInt(1, Integer.parseInt(id));
             statement.executeUpdate();
         } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error deleting student: " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
+
 

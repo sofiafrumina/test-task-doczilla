@@ -1,6 +1,5 @@
 $(document).ready(function() {
     const apiUrl = 'http://localhost:8080/students';
-    const apiUrlDelete = 'http://localhost:8080/students?id={id}';
 
     // Функция для получения списка студентов
     function fetchStudents() {
@@ -14,12 +13,11 @@ $(document).ready(function() {
                 $.each(data, function(index, student) {
                     const row = $('<tr>');
                     row.append($('<td>').text(student.id));
-                    row.append($('<td>').text(student.name));
-                    row.append($('<td>').text(student.surname));
+                    row.append($('<td>').text(student.first_name));
+                    row.append($('<td>').text(student.last_name));
                     row.append($('<td>').text(student.patronymic));
-                    row.append($('<td>').text(student.birthdate));
-                    row.append($('<td>').text(student.groupName));
-                    row.append($('<td>').text(student.uniqueNumber));
+                    row.append($('<td>').text(student.birth_date));
+                    row.append($('<td>').text(student.group));
                     tbody.append(row);
                 });
             },
@@ -33,19 +31,18 @@ $(document).ready(function() {
     $('#add-student-form').on('submit', function(e) {
         e.preventDefault(); // Остановить стандартное поведение формы
         const student = {
-            name: $('#name').val(),
-            surname: $('#surname').val(),
+            first_name: $('#name').val(),
+            last_name: $('#surname').val(),
             patronymic: $('#patronymic').val(),
-            birthdate: $('#birthdate').val(),
-            groupName: $('#groupName').val(),
-            uniqueNumber: $('#uniqueNumber').val()
+            birth_date: $('#birthdate').val(),
+            group: $('#groupName').val()
         };
 
         $.ajax({
             url: apiUrl,
             type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(student),
+            contentType: 'application/x-www-form-urlencoded',
+            data: student,
             success: function() {
                 fetchStudents(); // Обновляем список студентов
                 $('#add-student-form')[0].reset(); // Очищаем форму
@@ -57,25 +54,22 @@ $(document).ready(function() {
     });
 
     // Функция для удаления студента
-    // Обработчик события на отправку формы удаления студента
     $('#delete-student-form').on('submit', function(e) {
         e.preventDefault(); // Остановить стандартное поведение формы
-        const uniqueNumber = $('#deleteUniqueNumber').val(); // Получаем уникальный номер из поля ввода
+        const uniqueNumber = $('#deleteUniqueNumber').val();
 
-        // AJAX-запрос для удаления студента
         $.ajax({
-            url: `${apiUrl}?id=${uniqueNumber}`, // Формируем URL для удаления по ID
-            type: 'DELETE', // Указываем метод запроса
+            url: `${apiUrl}?id=${uniqueNumber}`,
+            type: 'DELETE',
             success: function() {
-                fetchStudents(); // Обновляем список студентов после успешного удаления
-                $('#delete-student-form')[0].reset(); // Очищаем форму
+                fetchStudents();
+                $('#delete-student-form')[0].reset();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Error deleting student:', textStatus, errorThrown); // Логируем ошибку
+                console.error('Error deleting student:', textStatus, errorThrown);
             }
         });
     });
-
 
     // Загружаем студентов при загрузке страницы
     fetchStudents();
